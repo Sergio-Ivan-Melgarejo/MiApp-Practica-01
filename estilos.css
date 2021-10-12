@@ -1,0 +1,310 @@
+:root {
+  --color-0: rgb(255, 255, 255);
+  --color-1: #222;
+  --color-1-1: #666;
+  --color-primario: #fcf8ec;
+  --color-secundario: #d0e8f2;
+  --color-terciario: #79a3b1;
+  --color-cuarto: #456268;
+  --color-2: rgb(40, 144, 241);
+  --color-3: rgb(199, 49, 49);
+}
+
+body {
+  font-family: sans-serif;
+  background: var(--color-primario);
+}
+
+.formulario {
+  width: 90%;
+  max-width: 1400px;
+  min-width: 375px;
+  border: 5px solid var(--color-cuarto);
+  padding: 1em;
+  background: var(--color-terciario);
+  color: var(--black-1);
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  margin: 50px auto 0;
+}
+
+.formulario__titulo {
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-secundario);
+}
+.formulario__span-w {
+  color: var(--color-cuarto);
+}
+
+.formulario__contenedor {
+  width: 90%;
+  border: 3px solid var(--color-cuarto);
+  display: grid;
+  grid-template-columns: minmax(auto, 10em) 1fr;
+  grid-template-rows: repeat(4, auto);
+  align-items: center;
+  padding: 1em;
+  gap: 1em;
+  border-radius: 10px;
+  margin: 1em auto;
+}
+
+label {
+  color: var(--color-cuarto);
+  cursor: pointer;
+  transition: border 400ms;
+  font-weight: bold;
+}
+
+label:hover {
+  color: var(--color-secundario);
+}
+
+.formulario__trasacion-label:hover {
+  border: none;
+  cursor: auto;
+  color: var(--color-cuarto);
+  font-weight: bold;
+  user-select: none;
+}
+
+input,
+#selecionar-categorias {
+  cursor: pointer;
+  color: var(--color-cuarto);
+  outline: none;
+  padding: 10px;
+  border: 1px solid var(--color-cuarto);
+  border-left: 10px solid var(--color-cuarto);
+  transition: border 350ms;
+  color: var(--color-cuarto);
+  font-weight: bold;
+}
+
+input::placeholder {
+  color: var(--color-terciario);
+}
+
+input:hover,
+#selecionar-categorias:hover {
+  border: 1px solid var(--color-secundario);
+  border-left: 10px solid var(--color-secundario);
+}
+
+input:active,
+#selecionar-categorias:active {
+  border: 1px solid var(--color-secundario);
+  border-left: 10px solid var(--color-secundario);
+}
+
+.caja-transacion {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* botones y ejemplo*/
+.formulario__botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 90%;
+  max-width: 1400px;
+  min-width: 375px;
+  border-left: 5px solid var(--color-cuarto);
+  border-right: 5px solid var(--color-cuarto);
+  padding: 1em;
+  background: var(--color-terciario);
+  margin: auto;
+  gap: 20px;
+}
+
+.botones {
+  color: var(--color-cuarto);
+  background: var(--color-secundario);
+  padding: 10px;
+  min-width: 100px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid var(--color-cuarto);
+  border-bottom: 5px solid var(--color-cuarto);
+  transition: background 300ms, color 300ms, border 300ms, padding 300ms;
+  min-width: 150px;
+}
+
+.botones:hover,
+#eliminar-ejemplo:hover {
+  background: var(--color-secundario);
+  color: var(--color-cuarto);
+  border: 1px solid var(--color-cuarto);
+  padding: 12px 10px;
+}
+.boton-3:hover,
+#eliminar-ejemplo:hover {
+  border-color: var(--color-3);
+  color: var(--color-3);
+}
+
+#ejemplos {
+  width: 100%;
+  font-weight: bold;
+}
+
+#eliminar-ejemplo {
+  color: var(--color-cuarto);
+  border: 1px solid var(--color-cuarto);
+  border-bottom: 5px solid var(--color-cuarto);
+}
+
+/*tabla____________*/
+.tabla {
+  width: 90%;
+  max-width: 1400px;
+  min-width: 375px;
+  border: 5px solid var(--color-cuarto);
+  padding: 1em;
+  background: var(--color-secundario);
+  display: flex;
+  flex-direction: column;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  margin: 0 auto 50px;
+  gap: 10px;
+  flex-direction: column-reverse;
+}
+
+.flexs,
+.flexs__ejemplo {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--color-cuarto);
+  padding: 5px;
+  justify-items: center;
+  border-radius: 5px;
+  gap: 5px;
+  position: relative;
+  background: var(--color-terciario);
+}
+
+.flex__items {
+  min-width: 120px;
+  flex: 1 1;
+  text-align: center;
+  border: 1px solid var(--color-cuarto);
+  margin: 0;
+  padding: 1em;
+  border-radius: 5px;
+  word-break: break-all;
+  color: var(--color-primario);
+}
+
+/* editar y eliminar tabla*/
+.opciones-editar,
+.opciones-eliminar,
+.eliminar__si,
+.eliminar__no {
+  width: 45%;
+  max-width: 200px;
+  margin: auto;
+  background: transparent;
+  border: none;
+  color: var(--color-secundario);
+  font-weight: bold;
+  transition: color 350ms;
+  cursor: pointer;
+}
+
+.opciones-editar:hover {
+  color: var(--color-2);
+}
+.opciones-eliminar:hover {
+  color: var(--color-3);
+}
+
+/* detalles finales */
+#eliminar-ejemplo:hover {
+  padding: calc(1em + 2px) 1em;
+}
+
+/* 
+.eliminar{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.eliminar__mensaje{
+    font-size: 1.5em;
+}
+.eliminar__si{
+    color: var(--color-5);
+    font-weight: bold;
+    font-size: 1.2em;
+} 
+.eliminar__no{
+    font-weight: bold;
+    color: var(--color-4);
+    font-size: 1.2em;
+} */
+
+/*js_______*/
+.eliminar-activo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-5);
+}
+.sin-descripcion {
+  color: var(--color-cuarto);
+}
+
+/* trancision */
+
+.formulario,
+.formulario__botones,
+.tabla {
+    transition: width 300ms, font-size 300ms;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        font-size: 15px;
+        margin: 0;
+        padding: 20px 0;
+    }
+    .formulario,
+    .formulario__botones,
+    .tabla {
+        max-width: 100%;
+        margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .flex__items{
+        min-width: 20%;
+        font-size: .8em;
+    }
+    .opciones-eliminar, .opciones-editar{
+        font-size: .9em;
+    }
+    /* .flex__items, #eliminar-ejemplo{
+        min-height: 60px;
+    } */
+}
+
+@media screen and (max-width: 1050px) and (min-width: 501px) {
+    body {
+        font-size: 20px;
+    }
+    .formulario,
+    .formulario__botones,
+    .tabla {
+        max-width: 99%;
+    }
+}
