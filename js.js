@@ -6,8 +6,6 @@ const botonAdd = document.querySelector(".boton-1");
 const tabla = document.getElementById("tabla");
 const formularioMedio = document.querySelector(".formulario__botones");
 let mensaje;
-//el id que se pasara para editar
-let editar;
 const opcionesCategoria = [ 
                 "Categoria",
                 "trabajo",
@@ -48,18 +46,11 @@ botonAdd.addEventListener("click",(e)=>{
 })
 
 tabla.addEventListener("click", (e)=>{
-    if(e.target.className == "opciones-eliminar"){
+    if(e.target.classList.contains("opciones-eliminar")){
         eliminiarElementoHTML(e); 
         eliminarDatoDelElemento(e.target.parentNode.parentNode.getAttribute("data-numero-id"));
     }
-    else if(e.target.className == "opciones-editar"){
-        if(e.target.textContent == "Editar" ){
-            editar = editarElementoHTML(e.target);
-        }
-        else{
-            editarDatoDelElemento(e.target, editar)
-        }
-    }
+
 })
  
 formularioMedio.addEventListener("click", (e)=>{
@@ -88,7 +79,6 @@ function formData(){
     let dato = {
     t : transactionFormData.get("formularioTransacion"),
     m : transactionFormData.get("formularioMonto"),
-    d : transactionFormData.get("formularioDescripcion"),
     c : transactionFormData.get("formularioCategoria")
     };
     //devuelvo simplificado y el objeto entero
@@ -115,29 +105,20 @@ const agregarTabla =(objeto)=>{
     if(comprobadoObjeto.t = "Ingreso" ) agregarTotalPositivo(comprobadoObjeto.m);
     else  agregarTotalNegativo(comprobadoObjeto.m);
     agregarTotal()
-    
 
     let pCategoria = document.createElement("p");
     pCategoria.classList.add("flex__items");
     pCategoria.textContent = comprobadoObjeto.c;
 
-    let pDescripcion = document.createElement("p");
-    pDescripcion.classList.add("flex__items");
-    pDescripcion.textContent = comprobadoObjeto.d;
-
     let divOpciones = document.createElement("div");
-    let btaOpciones1 = document.createElement("button");
-    let btaOpciones2 = document.createElement("button");
+    let btaEliminar = document.createElement("i");
 
     divOpciones.classList.add("flex__items");
     divOpciones.classList.add("opciones");
-    btaOpciones1.classList.add("opciones-editar");
-    btaOpciones2.classList.add("opciones-eliminar");
+    btaEliminar.classList.add("opciones-eliminar");
+    btaEliminar.classList.add("fas");
+    btaEliminar.classList.add("fa-trash-alt");
 
-    btaOpciones1.textContent = "Editar";
-    btaOpciones2.textContent = "Eliminar";
-
-    //
     if(pTipo.textContent == "Tipo") {
         pTipo.classList.add("sin-descripcion");
     }
@@ -147,17 +128,12 @@ const agregarTabla =(objeto)=>{
     if (pCategoria.textContent == "Categoria"){
         pCategoria.classList.add("sin-descripcion")
     }
-    if (pDescripcion.textContent == "Descripción"){
-        pDescripcion.classList.add("sin-descripcion")
-    }
 
-    divOpciones.appendChild(btaOpciones1);
-    divOpciones.appendChild(btaOpciones2);
+    divOpciones.appendChild(btaEliminar);
 
     divContenedor.appendChild(pTipo);
     divContenedor.appendChild(pMonto);
     divContenedor.appendChild(pCategoria);
-    divContenedor.appendChild(pDescripcion);
     divContenedor.appendChild(divOpciones);
 
     return divContenedor
@@ -187,7 +163,6 @@ const comprobarObjeto =(objeto)=>{
     if (objeto.m == null || objeto.m == undefined || objeto.m == "") objeto.m = "Monto";
     if (objeto.t == null || objeto.t == undefined || objeto.t == "") objeto.t = "Tipo";
     if (objeto.c == null || objeto.c == undefined || objeto.c == "") objeto.c = "Categoria";
-    if (objeto.d == null || objeto.d == undefined || objeto.d == "") objeto.d = "Descripción";
     return objeto
 }
 
@@ -226,69 +201,6 @@ const eliminarDatoDelElemento = (elementoID)=>{
 
 }
 
-const editarElementoHTML =(evento)=>{
-    //seleciono a los hijos para editarlos
-    let lista = evento.parentNode.parentNode.children;
-    //obtego el id para poder identificar caul cambiar
-    let id = evento.parentNode.parentNode.getAttribute("data-numero-id");
-    for(let i = 0; i < (lista.length -1); i++){
-        lista[i].setAttribute("contenteditable","");
-        lista[i].style.color = "var(--color-primario)";
-        lista[i].style.borderColor = "var(--color-2)";
-        }
-    //cambio el valor para confirmar elprimer click en guardar
-    evento.textContent ="Continuar";
-
-    return id
-} 
-const editarDatoDelElemento = (evento, elementoId)=>{
-    //seleciono a los hijos para editarlos
-    let lista = evento.parentNode.parentNode.children;
-    //seran los datos para guardar
-    let objeto = {};
-    for(let i = 0; i < lista.length -1; i++){
-        lista[i].removeAttribute("contenteditable");
-        //cambiar el color a los que no edito
-        if( lista[i].textContent == "Tipo" ||
-            lista[i].textContent == "Monto" ||
-            lista[i].textContent == "Categoria" ||
-            lista[i].textContent == "Descripción"){
-            lista[i].style.color = "var(--color-cuarto)";
-            lista[i].style.borderColor = "var(--color-tercero)";
-            }
-        lista[i].style.borderColor = "var(--color-tercero)";
-        switch(i){
-            case 0:
-            objeto.t = lista[i].textContent;
-            break
-            case 1:
-            objeto.m = lista[i].textContent;
-            break
-            case 2:
-            objeto.c = lista[i].textContent;
-            break
-            case 3:
-            objeto.d = lista[i].textContent;
-            break
-        }
-    }      
-     //cambio el valor para confirmar elprimer click en guardar
-    evento.textContent = "Editar";
-    //ya con esto el nuevo objeto esta listo
-    objeto.id = elementoId;
-
-    //obtengo los datos de la base de datos
-    let array = localStorage.getItem("DatosMIAPP");
-    array = JSON.parse(array);
-    //busco el indice que voy a eliminar
-    let posicion = array.findIndex(elemento => elemento.id == elementoId)
-    // lo elimino del array
-    array.splice(posicion,1,objeto);
-    //guardo denuevo los datos
-    array = JSON.stringify(array);
-    localStorage.setItem("DatosMIAPP", array)
-}
-
 //añadir animacion de eliminacion de todo
 const limpiarLista=()=>{
     let asegurar = confirm("¿seguro que deseas eliminar todos?");
@@ -324,7 +236,6 @@ const formularioValidacionesHTML = ()=>{
 const formularioValidacionesJs = ()=>{
     let mensaje = "todo ok";
     if (form.formularioMonto.value == "" ||
-        form.formularioDescripcion.value == "" ||
         form.formularioCategoria.value == "" ||
         form.formularioTransacion.value == ""){
         mensaje = "tienes que rellenar los campos";
@@ -352,7 +263,6 @@ const agregarTotalPositivo = valor =>{
     let num1 = spanTotalPositivo.textContent;
     let num2 = valor;
     let suma = parseInt(num1) + parseInt(num2);
-    console.log(suma, typeof suma)
     spanTotalPositivo.textContent = suma;
 }
 const agregarTotalNegativo = valor =>{
@@ -373,7 +283,3 @@ const agregarTotal = () =>{
 
 
 //añadir total, egreso y ingreso en el ejemplos
-
-//ver comomide los tamaños de los botones
-
-//quitar botaon de activar lavidaciones?
