@@ -14,9 +14,6 @@ const opcionesCategoria = [
                 "alimentos",
                 "entretenimiento"
 ];
-const spanTotalPositivo = document.getElementById("total-p");
-const spanTotalNegativo = document.getElementById("total-n");
-const spanTotal = document.getElementById("total");
 
 //eventos
 botonAdd.addEventListener("click",(e)=>{
@@ -54,9 +51,6 @@ tabla.addEventListener("click", (e)=>{
 })
  
 formularioMedio.addEventListener("click", (e)=>{
-    if(e.target.id == "eliminar-ejemplo"){
-        e.target.style.animatio = "";
-    }
     if(e.target.classList == "botones boton-3"){
         limpiarLista()
     }
@@ -65,8 +59,6 @@ formularioMedio.addEventListener("click", (e)=>{
     }
 })
 
-// para iniciar con los datos guardados en el localstorage
-// DOMContentLoaded evento que es disparado al terminar de cargar el DOM
 addEventListener("DOMContentLoaded",()=>{
     mostrarDatosObj();
     mostrarOpciones();
@@ -100,11 +92,6 @@ const agregarTabla =(objeto)=>{
     let pMonto = document.createElement("p");
     pMonto.classList.add("flex__items");
     pMonto.textContent =  comprobadoObjeto.m;
-
-    //agregar totales
-    if(comprobadoObjeto.t = "Ingreso" ) agregarTotalPositivo(comprobadoObjeto.m);
-    else  agregarTotalNegativo(comprobadoObjeto.m);
-    agregarTotal()
 
     let pCategoria = document.createElement("p");
     pCategoria.classList.add("flex__items");
@@ -166,6 +153,7 @@ const comprobarObjeto =(objeto)=>{
     return objeto
 }
 
+//muestra los datos guardados y la listad e categoria
 const mostrarDatosObj =()=>{
     let array = localStorage.getItem("DatosMIAPP");
     array = JSON.parse(array);
@@ -178,6 +166,20 @@ const mostrarDatosObj =()=>{
     }
 }
 
+const insertarOpciones = categoria =>{
+    let selecionElemento = document.getElementById("selecionar-categorias");
+    let htmlInsertar = `<option class="${categoria}">${categoria}</option>`
+    selecionElemento.insertAdjacentHTML("beforeend", htmlInsertar)
+    //guarda la categoria antes de cerrar la etiqueta selecionada
+}
+
+const mostrarOpciones = () =>{
+    opcionesCategoria.forEach((e)=>{
+        insertarOpciones(e)
+    })
+}
+//_____________
+
 const eliminiarElementoHTML =(evento)=>{
     // let asegurar = confirm("¿Deseas eliminar?");
     // if(asegurar){
@@ -186,6 +188,7 @@ const eliminiarElementoHTML =(evento)=>{
 
     // }
 } 
+
 //pasar el id, para eliminar el elemento
 const eliminarDatoDelElemento = (elementoID)=>{
     //obtengo los datos de la base de datos
@@ -233,6 +236,7 @@ const formularioValidacionesHTML = ()=>{
         form.removeAttribute("data-validacion-activada")
     }
 }
+
 const formularioValidacionesJs = ()=>{
     let mensaje = "todo ok";
     if (form.formularioMonto.value == "" ||
@@ -245,41 +249,3 @@ const formularioValidacionesJs = ()=>{
     }
     return mensaje
 }
-
-const insertarOpciones = categoria =>{
-    let selecionElemento = document.getElementById("selecionar-categorias");
-    let htmlInsertar = `<option class="${categoria}">${categoria}</option>`
-    selecionElemento.insertAdjacentHTML("beforeend", htmlInsertar)
-    //guarda la categoria antes de cerrar la etiqueta selecionada
-}
-
-const mostrarOpciones = () =>{
-    opcionesCategoria.forEach((e)=>{
-        insertarOpciones(e)
-    })
-}
-
-const agregarTotalPositivo = valor =>{
-    let num1 = spanTotalPositivo.textContent;
-    let num2 = valor;
-    let suma = parseInt(num1) + parseInt(num2);
-    spanTotalPositivo.textContent = suma;
-}
-const agregarTotalNegativo = valor =>{
-    let num1 = spanTotalNegativo.textContent;
-    let num2 = valor;
-    let suma = parseInt(num1) + parseInt(num2);
-    spanTotalNegativo.textContent = suma;
-}
-const agregarTotal = () =>{
-    let num1 = spanTotal.textContent;
-    let num2 = spanTotalPositivo.textContent;
-    let num3 = spanTotalNegativo.textContent;
-    let suma = parseInt(num1) +  parseInt(num2) - parseInt(num3);
-    spanTotal.textContent = suma;
-}
-
-//codigo a ejecutar
-
-
-//añadir total, egreso y ingreso en el ejemplos

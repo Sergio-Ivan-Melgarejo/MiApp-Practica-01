@@ -134,28 +134,15 @@ input:active,
   min-width: 150px;
 }
 
-.botones:hover,
-#eliminar-ejemplo:hover {
+.botones:hover{
   background: var(--color-secundario);
   color: var(--color-cuarto);
   border: 1px solid var(--color-cuarto);
   padding: 12px 10px;
 }
-.boton-3:hover,
-#eliminar-ejemplo:hover {
+.boton-3:hover{
   border-color: var(--color-3);
   color: var(--color-3);
-}
-
-#ejemplos {
-  width: 100%;
-  font-weight: bold;
-}
-
-#eliminar-ejemplo {
-  color: var(--color-cuarto);
-  border: 1px solid var(--color-cuarto);
-  border-bottom: 5px solid var(--color-cuarto);
 }
 
 /*tabla____________*/
@@ -221,11 +208,6 @@ input:active,
   color: var(--color-3);
 }
 
-/* detalles finales */
-#eliminar-ejemplo:hover {
-  padding: calc(1em + 2px) 1em;
-}
-
 /* 
 .eliminar{
     position: absolute;
@@ -260,10 +242,10 @@ input:active,
 }
 .sin-descripcion {
   color: var(--color-cuarto);
+  opacity: .6;
 }
 
 /* trancision */
-
 .formulario,
 .formulario__botones,
 .tabla {
@@ -291,10 +273,6 @@ input:active,
     .opciones-eliminar{
         font-size: .9em;
     }
-    /* .flex__items, #eliminar-ejemplo{
-        min-height: 60px;
-    } */
-
 }
 
 @media screen and (max-width: 1050px) and (min-width: 501px) {
