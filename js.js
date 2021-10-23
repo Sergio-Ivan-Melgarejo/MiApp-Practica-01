@@ -39,6 +39,9 @@ botonAdd.addEventListener("click",(e)=>{
     }
     else{
         document.querySelector(".mensaje-error").textContent = mensaje;
+        setTimeout(()=>{
+            document.querySelector(".mensaje-error").textContent = "";
+        },5000)
     }
 })
 
@@ -126,7 +129,7 @@ const agregarTabla =(objeto)=>{
     return divContenedor
 }
 
-//genera un id para cada elemento
+//genera un id para cada elemento (que ayuda para eliminar en la lista de localstorage)
 const generarID =()=>{
     let lastTransactionId = localStorage.getItem("IdMIAPP") || "-1" ;
     let newTransactionId = JSON.parse(lastTransactionId) + 1 ;
@@ -204,7 +207,6 @@ const eliminarDatoDelElemento = (elementoID)=>{
 
 }
 
-//añadir animacion de eliminacion de todo
 const limpiarLista=()=>{
     let asegurar = confirm("¿seguro que deseas eliminar todos?");
     if(asegurar){
@@ -242,7 +244,7 @@ const formularioValidacionesJs = ()=>{
     if (form.formularioMonto.value == "" ||
         form.formularioCategoria.value == "" ||
         form.formularioTransacion.value == ""){
-        mensaje = "tienes que rellenar los campos";
+        mensaje = "tienes que rellenar los campos o desactivar las validaciones";
     }
     if (form.formularioTransacion.value == "Egreso" && form.formularioMonto.value < 0){
         mensaje = "¿como es quieres ingresar un monto negativo con ingreso?";

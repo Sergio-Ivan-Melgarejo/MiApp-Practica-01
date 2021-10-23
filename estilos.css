@@ -208,31 +208,6 @@ input:active,
   color: var(--color-3);
 }
 
-/* 
-.eliminar{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-}
-
-.eliminar__mensaje{
-    font-size: 1.5em;
-}
-.eliminar__si{
-    color: var(--color-5);
-    font-weight: bold;
-    font-size: 1.2em;
-} 
-.eliminar__no{
-    font-weight: bold;
-    color: var(--color-4);
-    font-size: 1.2em;
-} */
-
 /*js_______*/
 .eliminar-activo {
   position: absolute;
@@ -243,6 +218,15 @@ input:active,
 .sin-descripcion {
   color: var(--color-cuarto);
   opacity: .6;
+}
+.mensaje-error{
+  color: var(--color-3);
+  text-align: center;
+  overflow: hidden;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: .8;
+  font-size: .8em;
 }
 
 /* trancision */
